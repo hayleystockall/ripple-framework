@@ -19,7 +19,7 @@ overrides:
 patchedDependencies:
   '@elastic/search-ui-elasticsearch-connector@1.19.1':
     hash: 7mrovnnomrmg7eukcxn4ezppcu
-    path: patches/@elastic__search-ui-elasticsearch-connector@1.19.0.patch
+    path: patches/@elastic__search-ui-elasticsearch-connector@1.19.1.patch
   vite-svg-loader@4.0.0:
     hash: b7iv6uosp7uohhdjf52hsfxagy
     path: patches/vite-svg-loader@4.0.0.patch
