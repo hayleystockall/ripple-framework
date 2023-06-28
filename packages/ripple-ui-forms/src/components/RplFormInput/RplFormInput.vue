@@ -18,6 +18,7 @@ interface Props {
   value?: string
   type?: string
   name: string
+  label?: string
   prefixIcon?: string
   suffixIcon?: string
   minlength?: number
@@ -29,14 +30,16 @@ interface Props {
   invalid?: boolean
   required?: boolean
   centeredText?: boolean
-  onInput?: (payload: Event) => void
-  onBlur?: (payload: Event) => void
+  globalEvents?: boolean
+  onInput: (payload: Event) => void
+  onBlur: (payload: Event) => void
 }
 
 const props = withDefaults(defineProps<Props>(), {
   type: 'text',
   className: 'rpl-form__input',
   value: undefined,
+  label: undefined,
   prefixIcon: undefined,
   suffixIcon: undefined,
   minlength: undefined,
@@ -49,6 +52,7 @@ const props = withDefaults(defineProps<Props>(), {
   invalid: false,
   variant: 'default',
   centeredText: false,
+  globalEvents: true,
   onInput: () => null,
   onBlur: () => null
 })
@@ -57,9 +61,8 @@ const emit = defineEmits<{
   (e: 'update', payload: rplEventPayload & { action: 'exit' }): void
 }>()
 
-const { emitRplEvent } = useRippleEvent('rpl-form-input', emit)
-
 const form: object = inject('form')
+const { emitRplEvent } = useRippleEvent('rpl-form-input', emit)
 
 const classes = computed(() => {
   return {
@@ -81,14 +84,15 @@ const handleChange = () => {
     'update',
     {
       action: 'exit',
+      field: 'input',
       id: props.id,
       type: props.type,
-      label: props.name,
+      label: props?.label,
       value: props.value,
       contextId: form?.id,
       contextName: form?.name
     },
-    { global: true }
+    { global: props.globalEvents }
   )
 }
 </script>
