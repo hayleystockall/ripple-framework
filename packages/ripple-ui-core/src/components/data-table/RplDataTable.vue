@@ -82,6 +82,7 @@ const mappedItems = computed(() => {
           :content="mappedItems.hidden?.[index]?.[0]"
           :vertical-header="headingType.vertical"
           :offset="offset"
+          :index="index"
         ></RplDataTableRow>
         <tfoot v-if="footer">
           <tr>
