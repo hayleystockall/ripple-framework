@@ -217,8 +217,7 @@ const handleUpdate = (event) => {
       ...event,
       id: props.id,
       field: 'date',
-      label: props?.label,
-      value: `${internalDay.value}-${internalMonth.value}-${internalYear.value}`
+      label: props?.label
     },
     { global: true }
   )
