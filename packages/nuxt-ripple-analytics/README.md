@@ -56,8 +56,16 @@ export default defineAppConfig({
   ripple: {
     analytics: {
       // routeChange events are enabled by default
-      // optional pass a function to overload the default behavior
-      routeChange: false,
+      // this parameter can be set to false to disable routeChange events
+      // or optional, a function can be returned to run in place of the default
+      routeChange: () => {
+        return ({ page, site }) => {
+          trackEvent({
+            // custom event data
+            event: 'page_view'
+          })
+        }
+      },
       
       // custom events listeners can be added here
       eventListeners: {
