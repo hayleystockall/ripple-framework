@@ -1,7 +1,6 @@
 import { defineNuxtPlugin, useAppConfig, useRuntimeConfig } from '#app'
-import { getBreadcrumbs } from '#imports'
 import { loadScript } from '@gtm-support/core'
-import { trackEvent } from '../lib/tracker'
+import routeChange from '../lib/routeChange'
 
 declare global {
   interface Window {
@@ -23,32 +22,6 @@ const setupGTM = (GTM_ID: string) => {
   }
 }
 
-const handleRouteChange = ({ route, site, page }) => {
-  let pageBreadcrumbs = page?.breadcrumbs
-    ? page?.breadcrumbs
-    : getBreadcrumbs(route.fullPath, page?.title, site?.menus?.menuMain)
-
-  if (Array.isArray(pageBreadcrumbs)) {
-    pageBreadcrumbs = pageBreadcrumbs
-      .filter((crumb) => crumb?.url !== '/')
-      .map((crumb) => crumb.text)
-  }
-
-  const trimValue = (value: any) =>
-    typeof value === 'string' ? value.trim() : value
-
-  trackEvent({
-    event: 'page_view',
-    name: page?.title,
-    page_url: route.fullPath,
-    content_type: page?.type,
-    search_term: trimValue(route.query?.q),
-    site_section: page?.siteSection?.name,
-    breadcrumbs: pageBreadcrumbs,
-    platform_event: 'routeView'
-  })
-}
-
 export default defineNuxtPlugin((nuxtApp) => {
   const appConfig = useAppConfig()?.ripple
   const runtimeConfig = useRuntimeConfig()?.public?.tide
@@ -61,7 +34,7 @@ export default defineNuxtPlugin((nuxtApp) => {
       const route = useRoute()
       const site = nuxtApp.payload.data?.[`site-${runtimeConfig.site}`]
       const page = nuxtApp.payload.data?.[`page-${route.fullPath}`]
-      let routeChangeCallback = handleRouteChange
+      let routeChangeCallback = routeChange
 
       if (appConfig?.analytics?.routeChange === false) {
         return
