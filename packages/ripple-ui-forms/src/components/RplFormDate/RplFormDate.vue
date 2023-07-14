@@ -233,13 +233,22 @@ const handleUpdate = (event) => {
       >
         Day
       </label>
-      <RplFormInput :id="`${id}__day`" :name="`${id}__day`"
-      :data-rpl-focus-input="id" centered-text :variant="variant"
-      placeholder="DD" :value="internalDay" :disabled="disabled"
-      :required="required" :invalid="isPartInvalid('day')" <<<<<<< HEAD
-      :aria-describedby="ariaDescribedby" ======= :global-events="false"
-      @update="handleUpdate" >>>>>>> fe8c9d23 (feat(@dpc-sdp/ripple-ui-forms):
-      add rplEvents to all field types) @input="handleChangeDay" />
+      <RplFormInput
+        :id="`${id}__day`"
+        :name="`${id}__day`"
+        :data-rpl-focus-input="id"
+        centered-text
+        :variant="variant"
+        placeholder="DD"
+        :value="internalDay"
+        :disabled="disabled"
+        :required="required"
+        :invalid="isPartInvalid('day')"
+        :aria-describedby="ariaDescribedby"
+        :global-events="false"
+        @input="handleChangeDay"
+        @update="handleUpdate"
+      />
     </div>
     <div class="rpl-form-date__part">
       <label
@@ -248,13 +257,21 @@ const handleUpdate = (event) => {
       >
         Month
       </label>
-      <RplFormInput :id="`${id}__month`" :name="`${id}__month`" centered-text
-      :variant="variant" placeholder="MM" :value="internalMonth"
-      :disabled="disabled" :required="required"
-      :invalid="isPartInvalid('month')" <<<<<<< HEAD
-      :aria-describedby="ariaDescribedby" ======= :global-events="false"
-      @update="handleUpdate" >>>>>>> fe8c9d23 (feat(@dpc-sdp/ripple-ui-forms):
-      add rplEvents to all field types) @input="handleChangeMonth" />
+      <RplFormInput
+        :id="`${id}__month`"
+        :name="`${id}__month`"
+        centered-text
+        :variant="variant"
+        placeholder="MM"
+        :value="internalMonth"
+        :disabled="disabled"
+        :required="required"
+        :invalid="isPartInvalid('month')"
+        :aria-describedby="ariaDescribedby"
+        @input="handleChangeMonth"
+        :global-events="false"
+        @update="handleUpdate"
+      />
     </div>
     <div class="rpl-form-date__part">
       <label
@@ -263,13 +280,21 @@ const handleUpdate = (event) => {
       >
         Year
       </label>
-      <RplFormInput :id="`${id}__year`" :name="`${id}__year`" centered-text
-      :variant="variant" placeholder="YYYY" :value="internalYear"
-      :disabled="disabled" :required="required" :invalid="isPartInvalid('day')"
-      <<<<<<< HEAD :aria-describedby="ariaDescribedby" =======
-      :global-events="false" @update="handleUpdate" >>>>>>> fe8c9d23
-      (feat(@dpc-sdp/ripple-ui-forms): add rplEvents to all field types)
-      @input="handleChangeYear" />
+      <RplFormInput
+        :id="`${id}__year`"
+        :name="`${id}__year`"
+        centered-text
+        :variant="variant"
+        placeholder="YYYY"
+        :value="internalYear"
+        :disabled="disabled"
+        :required="required"
+        :invalid="isPartInvalid('day')"
+        :aria-describedby="ariaDescribedby"
+        :global-events="false"
+        @update="handleUpdate"
+        @input="handleChangeYear"
+      />
     </div>
   </div>
 </template>
